@@ -2,6 +2,8 @@ import smbus
 import time
 import pygame
 
+#EZ NOW
+
 # for RPI version 1, use "bus = smbus.SMBus(0)"
 bus = smbus.SMBus(1)
 
