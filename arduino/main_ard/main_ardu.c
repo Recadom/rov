@@ -6,10 +6,10 @@
 byte pin_forwLeft = 9;
 byte pin_forwRight = 8;
 byte pin_vertLeft = 7;
-byte pin_vertRight = 6;	
+byte pin_vertRight = 6;
 byte pin_claw = 5;
 
-Wicked_DCMotor claw(M1);
+Wicked_DCMotor claw(M1); 
 
 
 Servo forwLeft;
@@ -84,4 +84,3 @@ void loop() {
 //callback for sending data
 //void sendData() {
 //  Wire.write(number);
-
