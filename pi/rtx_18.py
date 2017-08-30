@@ -28,21 +28,21 @@ class seri(object):
 
 
 if __name__ == "__main__":
-	i = seri()
-		try:
-            while True:
-                user = input('What would you like to send?')
-                i.write(user)
-                i.read()
-			
-		except KeyboardInterrupt: print ("Exiting Program")
-		
-		except: print ("Error Occurs, Exiting Program")	
-		
-		finally:
-			print ('Close successful!')
-			i.close()
-			break
+    i = seri()
+    try:
+        while True:
+            user = input('What would you like to send?')
+            i.write(user)
+            i.read()
+        
+    except KeyboardInterrupt: print ("Exiting Program")
+    
+#  except: print ("Error Occurs, Exiting Program")
+    
+    finally:
+        print ('Close successful!')
+        i.close()
+        quit()
 
 		
                     
