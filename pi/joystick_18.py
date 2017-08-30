@@ -5,9 +5,9 @@ from pygame.locals import *
 class joy_stick(object):
 
 	def __intit__(self): #To make anything global to all functions
-		self.joystick = pygame.joystick.Joystick(0)
-		
+##		self.joystick = pygame.joystick.Joystick(0)
 	def start(self): # Initializes everything!
+                self.joystick = pygame.joystick.Joystick(0)
 		pygame.init()
 		pygame.joystick.init()
 		self.joystick.init()
