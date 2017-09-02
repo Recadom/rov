@@ -8,8 +8,11 @@ class seri(object):
 		self.ser = serial.Serial('/dev/ttyAMA0', baudrate=9600,
                     parity=serial.PARITY_NONE,
                     stopbits=serial.STOPBITS_ONE,
-                    bytesize=serial.EIGHTBITS
+                    bytesize=serial.EIGHTBITS,
+                    timeout=1
                     )
+		self.ser.close()
+		self.ser.open()
 
 	def read(self): # Reads the data
 #       if ser.inWaiting() > 0:
@@ -18,7 +21,9 @@ class seri(object):
 		return self.ser.read()
     
 	def write(self,data): # Writes the data
-		self.ser.write(str(data))
+##                self.ser.open()
+##                self.ser.is_open()
+		self.ser.write(b'hello')
     
 	def close(self): # To close program    
 		self.ser.close()
@@ -28,13 +33,14 @@ class seri(object):
 
 
 if __name__ == "__main__":
-	i = seri()
+        i = seri()
         try:
             while True:
                 user = input('What would you like to send? ')
                 i.write(user)
-                
-                print(i.read())
+                print('d')
+                time.sleep(1)
+                #print(i.read())
                 
         except KeyboardInterrupt: print ("Exiting Program")
         
@@ -44,7 +50,26 @@ if __name__ == "__main__":
                 print ('Close successful!')
                 i.close()
 
-		
+'''
+if __name__ == "__main__":
+            i = seri()
+##        try:
+            while True:
+                user = input('What would you like to send? ')
+                i.write(user)
+                
+                print(i.read())
+                
+##        except KeyboardInterrupt: print ("Exiting Program")
+        
+##        except: print ("Error Occurs, Exiting Program")	
+        
+##        finally:
+##                print ('Close successful!')
+##                i.close()
+
+
+'''
                     
                     
                     
