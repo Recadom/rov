@@ -1,6 +1,5 @@
-#include <Servo.h>
+//#include <Servo.h>
 #include <Wire.h>
-#include <WickedMotorShield.h>
 
 
 byte pin_forwLeft = 9;
@@ -9,13 +8,12 @@ byte pin_vertLeft = 7;
 byte pin_vertRight = 6;
 byte pin_claw = 5;
 
-Wicked_DCMotor claw(M1); 
-
+/*
 
 Servo forwLeft;
 Servo forwRight;
 Servo vertLeft;
-Servo vertRight;
+Servo vertRight;*/
 
 #define SLAVE_ADDRESS 0x04
 int number = 0;
@@ -29,7 +27,7 @@ void setup() {
   //Wire.onReceive(receiveData);
   //Wire.onRequest(sendData);
 
-  forwLeft.attach(pin_forwLeft);
+  /*forwLeft.attach(pin_forwLeft);
   forwRight.attach(pin_forwRight);
   vertLeft.attach(pin_vertLeft);
   vertRight.attach(pin_vertRight);
@@ -37,7 +35,7 @@ void setup() {
   forwLeft.writeMicroseconds(1500);
   forwRight.writeMicroseconds(1500);
   vertLeft.writeMicroseconds(1500);
-  vertRight.writeMicroseconds(1500);
+  vertRight.writeMicroseconds(1500);*/
 
   delay(1000); // delay to allow the ESC to recognize the stopped signal
 }
@@ -49,12 +47,13 @@ void loop() {
     //state = 1500 + (number - 64) * 6.25;
     switch (number / 30) {
       case 1:
-        state = (number - 30) * 80 / 3 + 1100;
-        forwLeft.writeMicroseconds(state - turn);
-        forwRight.writeMicroseconds(state + turn);
+        digitalWrite(13,HIGH);
+        //state = (number - 30) * 80 / 3 + 1100;
+        //forwLeft.writeMicroseconds(state - turn);
+        //forwRight.writeMicroseconds(state + turn);
         break;
 
-      case 0:
+      /*case 0:
         turn = (number * 80 / 3 - 400) / 2;
         //forwLeft.writeMicroseconds(1500 + state);
         //forwRight.writeMicroseconds(1500 - state);
@@ -74,7 +73,7 @@ void loop() {
           claw.setDirection(DIR_CW);
         claw.setBrake(BRAKE_OFF);
         claw.setSpeed(abs(state));
-        break;
+        break;*/
 
     }
 
@@ -84,3 +83,4 @@ void loop() {
 //callback for sending data
 //void sendData() {
 //  Wire.write(number);
+
