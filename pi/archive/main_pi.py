@@ -29,10 +29,29 @@ def readNumber():
 while True:
         try:
                 pygame.event.pump()
-                for x in range (0, 4):
-                        var = int(joystick.get_axis(x) * 14 + 15 + x * 30)
-                        #if var < 128 and var >= 0:
-                        writeNumber(var)
+
+		axis_forward_back = 1
+		axis_left_right = 0
+		axis_up_down = 2
+		axis_twist = 3
+		
+
+		forwLeft = joystick.get_axis(axis_forward_back) * 63 + 64
+		writeNumber(forwLeft)
+		time.sleep(0.005)
+		
+		forwRight = joystick.get_axis(axis_forward_back) * 63 + 64
+		writeNumber(forwLeft)
+		time.sleep(0.005)
+
+		vertLeft = joystick.get_axis(axis_up_down) * 63 + 64
+		writeNumber(forwLeft)
+		time.sleep(0.005)
+		
+		vertRight = joystick.get_axis(axis_up_down) * 63 + 64
+		writeNumber(forwLeft)
+		time.sleep(0.005)
+
         except:
                 print('error!')
                 
