@@ -7,13 +7,14 @@ class joy_stick(object):
 	def __intit__(self): #To make anything global to all functions
 ##		self.joystick = pygame.joystick.Joystick(0)
 	def start(self): # Initializes everything!
-                self.joystick = pygame.joystick.Joystick(0)
+        self.joystick = pygame.joystick.Joystick(0)
 		pygame.init()
 		pygame.joystick.init()
 		self.joystick.init()
 		
     def get(self,trial = None): #pass true if trial version
         if trial == True:
+            pygame.event.pump()
             for event in pygame.event.wait(): # Waiting for a response
                 if event.type == pygame.JOYBUTTONDOWN:
                     print("Joystick button pressed.",event)
