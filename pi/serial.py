@@ -2,12 +2,12 @@ import smbus
 
 #bus = smbus.SMBus(1) # 0 = /dev/i2c-0 (port I2C0), 1 = /dev/i2c-1 (port I2C1)
 
-#address = 0x04
+##address = 0x04
 
-class _bus(bus_num, addr):
+class _bus(object):
 
-    def __self__(self,bus_num,addr):
-        self.bus = bus_num
+    def __init__(self,bus_num,addr):
+        self.bus = smbus.SMBus(bus_num)
         self.address = addr
 
     def writeNumber(self,value):
@@ -15,13 +15,14 @@ class _bus(bus_num, addr):
 
     def readNumber(self):
         number = self.bus.read_byte(self.address)
-        number = self.bus.read_byte_data(self.address, 1)
+##        number = self.bus.read_byte_data(self.address, 1)
         return number
+    
 
 
 
 if __name__ == "__main__":
-    import time
+    import time 
     while 1:
         try:
             dev_1 = _bus(1,0x04) #first device
