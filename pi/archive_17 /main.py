@@ -37,7 +37,8 @@ while True:
                         var = int(joystick.get_axis(x) * 14 + 15 + x * 30)
                         #if var < 128 and var >= 0:
                         writeNumber(var)
-        except:
-                print('error!')
+        except IOError , err:
+                print(err)
+                time.sleep(.25)
                 
 
