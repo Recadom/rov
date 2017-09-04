@@ -2,6 +2,10 @@ import smbus
 import time
 import pygame
 
+"""
+    except IOError, err:
+        print err
+"""
 
 # for RPI version 1, use "bus = smbus.SMBus(0)"
 bus = smbus.SMBus(1)
