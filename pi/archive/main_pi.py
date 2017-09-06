@@ -28,7 +28,7 @@ def readNumber():
 
 while True:
         try:
-                pygame.event.pump()
+        pygame.event.pump()
 
 		axis_forward_back = 1
 		axis_left_right = 0
