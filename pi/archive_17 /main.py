@@ -2,6 +2,10 @@ import smbus
 import time
 import pygame
 
+"""
+    except IOError, err:
+        print err
+"""
 
 # for RPI version 1, use "bus = smbus.SMBus(0)"
 bus = smbus.SMBus(1)
@@ -33,7 +37,8 @@ while True:
                         var = int(joystick.get_axis(x) * 14 + 15 + x * 30)
                         #if var < 128 and var >= 0:
                         writeNumber(var)
-        except:
-                print('error!')
+        except IOError , err:
+                print(err)
+                time.sleep(.25)
                 
 
