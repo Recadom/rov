@@ -35,7 +35,7 @@ axis_up_down = 2
 axis_twist = 3
 while True:
         try:
-                pygame.event.pump()
+        pygame.event.pump()
 
                 forwLeft = joystick.get_axis(axis_forward_back) * 64 + 64
                 writeNumber(forwLeft)

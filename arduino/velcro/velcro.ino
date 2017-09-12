@@ -39,9 +39,8 @@ void setup()
 void receiveEvent(int bytes) {
   int x = Wire.read();    // read one character from the I2C
   starttime = millis();   // reset turnoff counter
-  led(x);
-  //motor(x);
-  //old_motor(x);
+  //led(x);
+  motor(x);
 }
 
 
@@ -94,8 +93,11 @@ void loop() {
   // automatic shutoff loop
   static int endtime = starttime;
   if ((endtime - starttime) >= 500) // when 500ms has passed without signal
-    led(0);
-  endtime = millis();
+    forwLeft.writeMicroseconds(1500);
+    forwRight.writeMicroseconds(1500);
+    vertLeft.writeMicroseconds(1500);
+    vertRight.writeMicroseconds(1500);
+    endtime = millis();
   delay(100);
 }
 
