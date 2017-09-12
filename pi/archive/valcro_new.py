@@ -18,7 +18,6 @@ joystick.init()
 print (joystick.get_name)
 
 def writeNumber(value):
-        value = int(value)
 	bus.write_byte(address, int(value))
 	# bus.write_byte_data(address, 0, value)
 	return -1
@@ -36,26 +35,11 @@ axis_twist = 3
 while True:
         try:
                 pygame.event.pump()
-
-                forwLeft = joystick.get_axis(axis_forward_back) * 64 + 64
-                writeNumber(forwLeft)
-                         
-                time.sleep(0.01)
-
-                forwRight = joystick.get_axis(axis_forward_back) * 64 + 64
-                writeNumber(forwRight)
-                time.sleep(0.01)
-                
-                vertLeft = joystick.get_axis(axis_up_down) * 64 + 64
-                writeNumber(vertLeft)
-                time.sleep(0.01)
-		
-                vertRight = joystick.get_axis(axis_up_down) * 64 + 64
-                writeNumber(vertRight)
-                time.sleep(0.01)
-
-                #print(str(int(forwLeft)) + "\t" + str(int(forwLeft)) + "\t" + str(int(vertLeft)) + "\t" + str(int(vertRight)))
-
+                for x in range (0, 3):
+                        var = int(joystick.get_axis(x) * 14 + 15 + x * 30)
+                        writeNumber(var)
+##                        print(var)
+                        time.sleep(0.01)
                 
                 if end == True:
                         end = False
