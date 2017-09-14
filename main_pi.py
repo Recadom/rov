@@ -15,7 +15,8 @@ pygame.joystick.init()
 joystick = pygame.joystick.Joystick(0)
 joystick.init()
 
-print (joystick.get_name)
+print(joystick.get_name)
+
 
 def writeNumber(value):
     value = int(value)
@@ -23,10 +24,12 @@ def writeNumber(value):
     # bus.write_byte_data(address, 0, value)
     return -1
 
+
 def readNumber():
     number = bus.read_byte(address)
     number = bus.read_byte_data(address, 1)
     return number
+
 ##Setup
 end = True
 axis_forward_back = 1
@@ -34,6 +37,7 @@ axis_left_right = 0
 axis_up_down = 2
 axis_twist = 3
 t_wait = 0.005
+
 while True:
     try:
 
@@ -69,4 +73,4 @@ while True:
     except IOError as err:
         end = True
         time.sleep(0.5)
-        print (err)
+        print(err)
