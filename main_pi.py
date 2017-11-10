@@ -15,7 +15,8 @@ pygame.joystick.init()
 joystick = pygame.joystick.Joystick(0)
 joystick.init()
 
-print (joystick.get_name)
+print(joystick.get_name)
+
 
 def current_check(m_1, m_2, m_3, m_4):
         value = abs(m_1) + abs(m_2) + abs(m_3) + abs(m_4)
@@ -29,15 +30,17 @@ def current_check(m_1, m_2, m_3, m_4):
                 return m_1, m_2, m_3, m_4
 
 def writeNumber(value):
-        value = int(value)
-	bus.write_byte(address, value)
-	# bus.write_byte_data(address, 0, value)
-	return -1
+    value = int(value)
+    bus.write_byte(address, value)
+    # bus.write_byte_data(address, 0, value)
+    return -1
+
 
 def readNumber():
-	number = bus.read_byte(address)
-	number = bus.read_byte_data(address, 1)
-	return number
+    number = bus.read_byte(address)
+    number = bus.read_byte_data(address, 1)
+    return number
+
 ##Setup
 err_time = 0
 end = True
@@ -134,3 +137,4 @@ print ('')
                 writeNumber(0)
                 time.sleep(0.01)
 """
+
