@@ -19,7 +19,7 @@ print(joystick.get_name)
 
 
 def current_check(m_1, m_2, m_3, m_4):
-        value = abs(m_1) + abs(m_2) + abs(m_3) + abs(m_4)
+        value = abs(m_1) + abs(m_2) + abs(m_3) * 2 + abs(m_4)
         if value > 2:
                 e_1 = m_1 * 0.75 ** ((value-2)/2)
                 e_2 = m_2 * 0.75 ** ((value-2)/2)
@@ -54,7 +54,7 @@ while True:
         try:
                 
                 pygame.event.pump()
-                m_1, m_2, m_3, m_4 = current_check(joystick.get_axis(axis_forward_back),joystick.get_axis(axis_left_right),joystick.get_axis(axis_up_down),joystick.get_axis(axis_up_down))
+                m_1, m_2, m_3, m_4 = current_check(joystick.get_axis(axis_forward_back),joystick.get_axis(axis_left_right),joystick.get_axis(axis_up_down),joystick.get_axis(axis_twist))
 
                 forwLeft = (m_1 + m_2/2) * 63 + 64
                 forwRight = (m_1 - m_2/2) * 63 + 64
@@ -71,7 +71,8 @@ while True:
                         forwRight = -1 * 63 + 64
                 
                 vertLeft = m_3 * 63 + 64
-                vertRight = m_4 * 63 + 64
+                vertRight = m_3 * 63 + 64
+				claw = m_4 * 63 + 64
 
                 #print(forwLeft, forwRight, vertLeft, vertRight)
                 
@@ -85,6 +86,9 @@ while True:
                 time.sleep(t_wait)
                 
                 writeNumber(vertRight)
+                time.sleep(t_wait)
+				
+				writeNumber(claw)
                 time.sleep(t_wait)
                 
                 writeNumber(0)
