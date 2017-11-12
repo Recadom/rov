@@ -17,14 +17,31 @@ joystick.init()
 
 print(joystick.get_name)
 
+def claw_conv(claw_state, count):
+        time = count * 0.06
+        value = 0.66 / (10 * time + 1) + 0.33
+        count += 1
+        
+        if (claw_state > 0):
+                value = 1 * value
+                
+        elif (claw_state < 0):
+                value = -1 * value
+                
+        elif claw_state == 0:
+                count = 0
+                value = 0
+        
+        return int(value * 63 + 64), count
+
 
 def current_check(m_1, m_2, m_3, m_4):
-        value = abs(m_1) + abs(m_2) + abs(m_3) * 2 + abs(m_4)
+        value = abs(m_1) + abs(m_2) + abs(m_3) * 2
         if value > 2:
                 e_1 = m_1 * 0.75 ** ((value-2)/2)
                 e_2 = m_2 * 0.75 ** ((value-2)/2)
                 e_3 = m_3 * 0.75 ** ((value-2)/2)
-                e_4 = m_4 * 0.75 ** ((value-2)/2)
+                e_4 = m_4 #* 0.75 ** ((value-2)/2)
                 return e_1,e_2,e_3,e_4
         else:
                 return m_1, m_2, m_3, m_4
@@ -49,9 +66,10 @@ axis_left_right = 0
 axis_up_down = 2
 axis_twist = 3
 t_wait = 0.01
+count = 0
 
 while True:
-        try:
+        try: # m_4 is claw
                 
                 pygame.event.pump()
                 m_1, m_2, m_3, m_4 = current_check(joystick.get_axis(axis_forward_back),joystick.get_axis(axis_left_right),joystick.get_axis(axis_up_down),joystick.get_axis(axis_twist))
@@ -72,7 +90,13 @@ while True:
                 
                 vertLeft = m_3 * 63 + 64
                 vertRight = m_3 * 63 + 64
-				claw = m_4 * 63 + 64
+
+                #print(count)
+                claw, count = claw_conv(m_4,count)
+                #print(claw)
+                
+                
+		#claw = int(round(m_4,0))* 63 + 64
 
                 #print(forwLeft, forwRight, vertLeft, vertRight)
                 
@@ -88,7 +112,7 @@ while True:
                 writeNumber(vertRight)
                 time.sleep(t_wait)
 				
-				writeNumber(claw)
+		writeNumber(claw)
                 time.sleep(t_wait)
                 
                 writeNumber(0)

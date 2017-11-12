@@ -85,7 +85,7 @@ void motor(int x) {
 
     case 4:
       //vertRight.writeMicroseconds(state);
-      int clawSpeed = (x - 64) * 3;
+      int clawSpeed = (x - 64) * 4;
       
       if (clawSpeed == 0) {
         analogWrite(ENA, 0);
