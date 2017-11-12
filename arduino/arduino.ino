@@ -10,8 +10,8 @@ byte pin_vertLeft = 9;
 byte pin_vertRight = 6;
 
 // define claw pins
-int IN1=8;
-int IN2=9;
+int IN1=4;
+int IN2=5;
 int ENA=3;
 
 // start servos
