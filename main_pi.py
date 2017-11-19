@@ -18,8 +18,8 @@ joystick.init()
 print(joystick.get_name)
 
 def claw_conv(claw_state, count):
-        time = count * 0.06
-        value = 0.66 / (10 * time + 1) + 0.33
+        time = count * 0.1 #.06 S
+        value = 0.4 / (10 * time + 1) + 0.2 # .33 MIN * .66
         count += 1
         
         if (claw_state > 0):
