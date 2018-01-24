@@ -1,7 +1,7 @@
 //www.elegoo.com
 //2016.12.9
-int in1 = 7;
-int in2 = 8;
+int in1 = 0;
+int in2 = 1;
 int adc_id = 0;
 int HistoryValue = 0;
 char printBuffer[128];
@@ -30,16 +30,16 @@ void loop() {
       HistoryValue = value;
     }
 
-    if(value < 100){
+    if(value < 50){
       digitalWrite(in1, LOW);
       digitalWrite(in2, HIGH);
     }
-    if(value >= 100 && value < 270){
+    if(value >= 50 && value < 280){
       digitalWrite(in1, LOW);
       digitalWrite(in2, LOW);
     }
       
-    if(value >= 270) {
+    if(value >= 280) {
       digitalWrite(in1, HIGH);
       digitalWrite(in2, LOW);
     }

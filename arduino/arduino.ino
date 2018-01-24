@@ -1,6 +1,12 @@
 #include <Wire.h>
 #include <Servo.h>
 
+int in1 = 0;
+int in2 = 1;
+int adc_id = 0;
+int HistoryValue = 0;
+char printBuffer[128];
+
 #define SLAVE_ADDRESS 0x04
 
 // define motor pins
@@ -41,6 +47,12 @@ void setup()
   //set up claw
   pinMode(IN1,OUTPUT);
   pinMode(IN2,OUTPUT);
+  
+  pinMode(in1, OUTPUT);
+  digitalWrite(in1, HIGH);
+
+  pinMode(in2, OUTPUT);
+  digitalWrite(in2, HIGH);
 
   delay(1000); // delay to allow the ESC to recognize the stopped signal
 }
@@ -107,7 +119,29 @@ void motor(int x) {
 }
 
 void loop() {
-  delay(100);
+  int value = analogRead(adc_id); // get adc value
+
+    if(((HistoryValue>=value) && ((HistoryValue - value) > 10)) || ((HistoryValue<value) && ((value - HistoryValue) > 10)))
+    {
+      //sprintf(printBuffer,"ADC%d level is %d\n",adc_id, value);
+      //Serial.print(printBuffer);
+      delay(100);
+      HistoryValue = value;
+    }
+
+    if(value < 50){
+      digitalWrite(in1, LOW);
+      digitalWrite(in2, HIGH);
+    }
+    if(value >= 50 && value < 280){
+      digitalWrite(in1, LOW);
+      digitalWrite(in2, LOW);
+    }
+      
+    if(value >= 280) {
+      digitalWrite(in1, HIGH);
+      digitalWrite(in2, LOW);
+    }
 }
 
 
