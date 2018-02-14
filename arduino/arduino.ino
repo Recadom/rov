@@ -3,7 +3,7 @@
 
 int in1 = 0;
 int in2 = 1;
-int adc_id = 0;
+int adc_id = 0; // Water level
 int HistoryValue = 0;
 char printBuffer[128];
 
@@ -17,7 +17,7 @@ byte pin_vertRight = 6;
 
 // define claw pins
 int IN1=4;
-int IN2=5;
+int IN2=2;
 int ENA=3;
 
 // start servos
