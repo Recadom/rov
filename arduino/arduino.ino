@@ -64,6 +64,12 @@ void receiveEvent(int bytes) {
   }
 }
 
+void speaker(boolean play) {
+  if(play)
+    tone(8, 400)
+  else() 
+  noTone(8);
+}
 
 void motor(int x) {
   static byte mot = 0;    // create a number that will rememember its last value
@@ -113,6 +119,11 @@ void motor(int x) {
         digitalWrite(IN2, LOW);
       }
 
+      mot = 5;
+      break;
+      
+      case 5:
+        speaker(x);
       mot = 0;
       break;
   }

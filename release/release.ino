@@ -11,20 +11,27 @@ void setup()
   pinMode(IN1,OUTPUT);
   pinMode(IN2,OUTPUT);
   Serial.begin(9600);
+  delay(1000);
 }
 
 void loop() {
-  finished=millis();
+releaseMot();
+   Serial.println("WOW");
+delay(5000);
+
+}
+
+void releaseMot()
+{
+    finished=millis();
   elapsed=finished-start;
   start=millis();
 
-  while (elapsed < 1000) {
-
-
+  while (elapsed < 2000) {
     int max_mot = 255;
-    int prop = 0.4;
-    int time = elapsed/100;
-    int value = prop*max_mot / (time) + (1-prop)*max_mot;
+    double prop = 0.6;
+    double time = (elapsed+100)/100;
+    int value = 255;//prop * max_mot / time + (1-prop)*max_mot;
 
     Serial.println(value);
 
@@ -45,7 +52,7 @@ void loop() {
     finished=millis();
     elapsed=finished-start;
   }
+  analogWrite(ENA, 0);
 }
-
 
 

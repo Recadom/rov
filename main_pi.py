@@ -72,7 +72,7 @@ while True:
         try: # m_4 is claw
                 
                 pygame.event.pump()
-                m_1, m_2, m_3, m_4 = current_check(joystick.get_axis(axis_forward_back),joystick.get_axis(axis_left_right),joystick.get_axis(axis_up_down),joystick.get_axis(axis_twist))
+                m_1, m_2, m_3, m_4, m_5= current_check(joystick.get_axis(axis_forward_back),joystick.get_axis(axis_left_right),joystick.get_axis(axis_up_down),joystick.get_axis(axis_twist), joystick.get_hat)
 
                 forwLeft = (m_1 + m_2/2) * 63 + 64
                 forwRight = (m_1 - m_2/2) * 63 + 64
@@ -112,7 +112,10 @@ while True:
                 writeNumber(vertRight)
                 time.sleep(t_wait)
 				
-		writeNumber(claw)
+		writeNumber(m_5)
+                time.sleep(t_wait)
+
+		writeNumber(speaker)
                 time.sleep(t_wait)
                 
                 writeNumber(0)
