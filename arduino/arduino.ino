@@ -12,7 +12,7 @@ char printBuffer[128];
 // define motor pins
 byte pin_forwLeft = 11;
 byte pin_forwRight = 10;
-byte pin_vertLeft = 9;
+byte pin_vertLeft = 5;
 byte pin_vertRight = 6;
 
 // define claw pins
