@@ -1,8 +1,9 @@
 #include <Wire.h>
 #include <Servo.h>
 
-int in1 = 0;
-int in2 = 1;
+int speaker_pin = 3;
+int in1 = 12;
+int in2 = 13;
 int adc_id = 0; // Water level
 int HistoryValue = 0;
 char printBuffer[128];
@@ -18,7 +19,7 @@ byte pin_vertRight = 6;
 // define claw pins
 int IN1=4;
 int IN2=2;
-int ENA=3;
+int ENA=8;
 
 // start servos
 Servo forwLeft;
@@ -66,9 +67,9 @@ void receiveEvent(int bytes) {
 
 void speaker(boolean play) {
   if(play)
-    tone(8, 400)
+    tone(speaker_pin, 400)
   else() 
-  noTone(8);
+  noTone(speaker_pi);
 }
 
 void motor(int x) {
