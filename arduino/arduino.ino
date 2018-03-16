@@ -1,8 +1,8 @@
 #include <Wire.h>
 #include <Servo.h>
 
-int in1 = 0;
-int in2 = 1;
+int in1 = 12;
+int in2 = 13;
 int adc_id = 0; // Water level
 int HistoryValue = 0;
 char printBuffer[128];
@@ -28,7 +28,7 @@ Servo vertRight;
 
 void setup()
 {
-  //Serial.begin(9600);
+  Serial.begin(9600);
   Wire.begin(SLAVE_ADDRESS);      // join i2c bus with address #4
   Wire.onReceive(receiveEvent);   // register event
 
@@ -64,15 +64,24 @@ void receiveEvent(int bytes) {
   }
 }
 
-void speaker(boolean play) {
-  if(play)
-    tone(8, 400)
-  else() 
-  noTone(8);
+void speaker(int play) {
+  Serial.print(play);
+  if (play == 3) {
+    tone(8, 400, 1000);
+  }
+  /*else
+  {
+    noTone(8);
+  }*/
 }
 
 void motor(int x) {
+  
   static byte mot = 0;    // create a number that will rememember its last value
+  /*Serial.print(mot);
+Serial.print('\t');
+Serial.print(x);
+Serial.print('\n');*/
   if (x == 0) {
     mot = 0;
     return;
@@ -82,26 +91,35 @@ void motor(int x) {
   // iterate to next motor after every signal
   switch (mot) {
     case 0:
-      forwLeft.writeMicroseconds(state);
+      {
+        forwLeft.writeMicroseconds(state);
       mot = 1;
       break;
+      }
 
     case 1:
+    {
       forwRight.writeMicroseconds(state);
       mot = 2;
       break;
+    }
+    
     case 2:
-
+{
       vertLeft.writeMicroseconds(state);
       mot = 3;
       break;
+}
 
     case 3:
+    {
       vertRight.writeMicroseconds(state);
       mot = 4;
       break;
+    }
 
     case 4:
+    {
       //vertRight.writeMicroseconds(state);
       int clawSpeed = (x - 64) * 4;
       
@@ -118,14 +136,16 @@ void motor(int x) {
         digitalWrite(IN1, HIGH); // rotate reverse
         digitalWrite(IN2, LOW);
       }
-
       mot = 5;
       break;
+    }
       
       case 5:
+      {
         speaker(x);
       mot = 0;
       break;
+      }
   }
 }
 
