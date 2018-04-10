@@ -1,6 +1,7 @@
 #include <Wire.h>
 #include <Servo.h>
 
+int speaker_pin = 3;
 int in1 = 12;
 int in2 = 13;
 int adc_id = 0; // Water level
@@ -18,7 +19,7 @@ byte pin_vertRight = 6;
 // define claw pins
 int IN1=4;
 int IN2=2;
-int ENA=3;
+int ENA=8;
 
 // start servos
 Servo forwLeft;
@@ -28,7 +29,7 @@ Servo vertRight;
 
 void setup()
 {
-  Serial.begin(9600);
+  //Serial.begin(9600);
   Wire.begin(SLAVE_ADDRESS);      // join i2c bus with address #4
   Wire.onReceive(receiveEvent);   // register event
 
@@ -65,15 +66,16 @@ void receiveEvent(int bytes) {
 }
 
 void speaker(int play) {
-  Serial.print(play);
+  //Serial.print(play);
   if (play == 3) {
-    tone(8, 400, 1000);
+    tone(speaker_pin, 400, 1000);
   }
+}
   /*else
   {
     noTone(8);
   }*/
-}
+
 
 void motor(int x) {
   

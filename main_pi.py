@@ -19,7 +19,7 @@ print(joystick.get_name)
 
 def claw_conv(claw_state, count):
         time = count * 0.1 #.06 S
-        value = 0.4 / (10 * time + 1) + 0.2 # .33 MIN * .66
+        value = 0.4 / (10 * time + 1) + 0.4 # .33 MIN * .66
         count += 1
         
         if (claw_state > 0):
@@ -72,7 +72,8 @@ while True:
         try: # m_4 is claw
                 
                 pygame.event.pump()
-                m_1, m_2, m_3, m_4, m_5= current_check(joystick.get_axis(axis_forward_back),joystick.get_axis(axis_left_right),joystick.get_axis(axis_up_down),joystick.get_axis(axis_twist), joystick.get_hat)
+                m_1, m_2, m_3, m_4 = current_check(joystick.get_axis(axis_forward_back),joystick.get_axis(axis_left_right),joystick.get_axis(axis_up_down),joystick.get_axis(axis_twist))
+                m_5 = joystick.get_hat(0)
 
                 forwLeft = (m_1 + m_2/2) * 63 + 64
                 forwRight = (m_1 - m_2/2) * 63 + 64
@@ -112,12 +113,13 @@ while True:
                 writeNumber(vertRight)
                 time.sleep(t_wait)
 				
-		writeNumber(m_5)
-                time.sleep(t_wait)
-
-		writeNumber(speaker)
+		writeNumber(claw)
                 time.sleep(t_wait)
                 
+                speaker = int(m_5[1] + 2)
+		writeNumber(speaker)
+                time.sleep(t_wait)
+                print(speaker)
                 writeNumber(0)
                 time.sleep(t_wait)
                 
