@@ -88,7 +88,7 @@ Serial.print('\n');*/
     mot = 0;
     return;
   }
-  int state = (x - 64) * 400 / 63 + 1500;    //convert from 0-127 to 1100-1900
+  int state = (x - 64) * 200 / 63 + 1500;    //convert from 0-127 to 1100-1900 *now speed is halfed
 
   // iterate to next motor after every signal
   switch (mot) {
