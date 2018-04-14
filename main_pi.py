@@ -119,7 +119,7 @@ while True:
                 speaker = int(m_5[1] + 2)
 		writeNumber(speaker)
                 time.sleep(t_wait)
-                print(speaker)
+                #print(speaker)
                 writeNumber(0)
                 time.sleep(t_wait)
                 

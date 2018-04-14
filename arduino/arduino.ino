@@ -7,6 +7,7 @@ int in2 = 13;
 int adc_id = 0; // Water level
 int HistoryValue = 0;
 char printBuffer[128];
+int clawSpeed;
 
 #define SLAVE_ADDRESS 0x04
 
@@ -66,10 +67,10 @@ void receiveEvent(int bytes) {
 }
 
 void speaker(boolean play) {
-  if(play)
-    tone(speaker_pin, 400)
-  else() 
-  noTone(speaker_pi);
+  if(play){
+    tone(speaker_pin, 400);}
+  else
+  noTone(speaker_pin);
 }
 
 void motor(int x) {
@@ -104,7 +105,7 @@ void motor(int x) {
 
     case 4:
       //vertRight.writeMicroseconds(state);
-      int clawSpeed = (x - 64) * 4;
+       clawSpeed = (x - 64) * 4;
       
       if (clawSpeed == 0) {
         analogWrite(ENA, 0);
