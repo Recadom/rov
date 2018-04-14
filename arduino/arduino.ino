@@ -1,5 +1,6 @@
 #include <Wire.h>
 #include <Servo.h>
+Servo claw;
 
 int speaker_pin = 3;
 int in1 = 12;
@@ -16,10 +17,11 @@ byte pin_forwRight = 10;
 byte pin_vertLeft = 5;
 byte pin_vertRight = 6;
 
-// define claw pins
+/* define claw pins
 int IN1=4;
 int IN2=2;
 int ENA=8;
+*/
 
 // start servos
 Servo forwLeft;
@@ -45,9 +47,11 @@ void setup()
   vertLeft.writeMicroseconds(1500);
   vertRight.writeMicroseconds(1500);
 
-  //set up claw
+  /*set up claw
   pinMode(IN1,OUTPUT);
-  pinMode(IN2,OUTPUT);
+  pinMode(IN2,OUTPUT);*/
+  
+  claw.attach(9); 
   
   pinMode(in1, OUTPUT);
   digitalWrite(in1, HIGH);
@@ -123,9 +127,9 @@ Serial.print('\n');*/
     case 4:
     {
       //vertRight.writeMicroseconds(state);
-      int clawSpeed = (x - 64) * 4;
-      
-      if (clawSpeed == 0) {
+      int clawSpeed = 45 - abs(x - 64) * 45 / 64;
+      claw.write(clawSpeed);
+      /*if (clawSpeed == 0) {
         analogWrite(ENA, 0);
       }
       else if (clawSpeed > 0) {
@@ -137,7 +141,7 @@ Serial.print('\n');*/
         analogWrite(ENA, abs(clawSpeed)); // motor speed
         digitalWrite(IN1, HIGH); // rotate reverse
         digitalWrite(IN2, LOW);
-      }
+      }*/
       mot = 5;
       break;
     }
