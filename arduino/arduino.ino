@@ -18,16 +18,17 @@ byte pin_forwRight = 10;
 byte pin_vertLeft = 5;
 byte pin_vertRight = 6;
 
-int prevSignals[5] = { 
-  64 };
-int Signals[5] = { 
-  64 };
+int prevSignals[5] = {64, 64, 64, 64, 64};
+int Signals[5] = {64, 64, 64, 64, 64};
+int offSignals[5] = {64, 64, 64, 64, 64};
 
 /* define claw pins
  int IN1=4;
  int IN2=2;
  int ENA=8;
  */
+
+ int timer = 0;
 
 // start servos
 Servo forwLeft;
@@ -82,7 +83,7 @@ void receiveEvent(int bytes) {
   while (Wire.available()) {
     x = Wire.read();    // read one character from the I2C
   }
-
+  timer = 0;
   static byte mot = 0;
 
   if (x == 0) {
@@ -213,7 +214,6 @@ void motor(int x, int mot) {
 
 void loop() {
   int value = analogRead(adc_id); // get adc value
-
   if(((HistoryValue>=value) && ((HistoryValue - value) > 10)) || ((HistoryValue<value) && ((value - HistoryValue) > 10)))
   {
     //sprintf(printBuffer,"ADC%d level is %d\n",adc_id, value);
@@ -234,6 +234,13 @@ void loop() {
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);
   }
+  
+  if (timer > 2) {
+    for (int i = 0; i < 5; ++i)
+        motor(offSignals[i], i);
+    timer = 0;
+  }
+  ++timer;
   delay(100);
 }
 
