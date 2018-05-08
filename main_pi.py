@@ -17,7 +17,7 @@ joystick.init()
 
 print(joystick.get_name)
 
-def claw_conv(claw_state, count):
+'''def claw_conv(claw_state, count):
         time = count * 0.1 #.06 S
         value = 0.4 / (10 * time + 1) + 0.4 # .33 MIN * .66
         count += 1
@@ -33,11 +33,11 @@ def claw_conv(claw_state, count):
                 value = 0
         
         return int(value * 63 + 64), count
-
+'''
 
 def current_check(m_1, m_2, m_3, m_4):
         value = abs(m_1) + abs(m_2) + abs(m_3) * 2
-        if value > 2:
+        if value > 2000:
                 e_1 = m_1 * 0.75 ** ((value-2)/2)
                 e_2 = m_2 * 0.75 ** ((value-2)/2)
                 e_3 = m_3 * 0.75 ** ((value-2)/2)
@@ -75,53 +75,52 @@ while True:
                 m_1, m_2, m_3, m_4 = current_check(joystick.get_axis(axis_forward_back),joystick.get_axis(axis_left_right),joystick.get_axis(axis_up_down),joystick.get_axis(axis_twist))
                 m_5 = joystick.get_hat(0)
 
-                forwLeft = (m_1 + m_2/2) * 63 + 64
-                forwRight = (m_1 - m_2/2) * 63 + 64
+                forwLeft = (m_1 + m_2/2) * 50 + 64
+                forwRight = (m_1 - m_2/2) * 50 + 64
                 if (m_1 + m_2/2) > 1:
-                        forwLeft = 1 * 63 + 64
+                        forwLeft = 1 * 50 + 64
 
                 if (m_1 + m_2/2) < -1:
-                        forwLeft = -1 * 63 + 64
+                        forwLeft = -1 * 50 + 64
 
                 if (m_1 - m_2/2) > 1:
-                        forwRight = 1 * 63 + 64
+                        forwRight = 1 * 50 + 64
                         
                 if (m_1 - m_2/2) < -1:
                         forwRight = -1 * 63 + 64
                 
-                vertLeft = m_3 * 63 + 64
-                vertRight = m_3 * 63 + 64
+                vertLeft = m_3 * 50 + 64
+                vertRight = m_3 * 50 + 64
 
                 #print(count)
-                claw, count = claw_conv(m_4,count)
+               # claw, count = claw_conv(m_4,count)
                 #print(claw)
                 
                 
 		#claw = int(round(m_4,0))* 63 + 64
 
                 #print(forwLeft, forwRight, vertLeft, vertRight)
+                for nonie in range(0,2):
+                        writeNumber(int(forwLeft))#fr
+                	time.sleep(t_wait)
                 
-                writeNumber(forwLeft)
-                time.sleep(t_wait)
+                	writeNumber(int(vertRight))#vr
+                	time.sleep(t_wait)
                 
-                writeNumber(forwRight)
-                time.sleep(t_wait)
+                	writeNumber(int(forwRight))#frl
+                	time.sleep(t_wait)
                 
-                writeNumber(vertLeft)
-                time.sleep(t_wait)
-                
-                writeNumber(vertRight)
-                time.sleep(t_wait)
-				
-		writeNumber(claw)
-                time.sleep(t_wait)
-                
-                speaker = int(m_5[1] + 2)
-		writeNumber(speaker)
-                time.sleep(t_wait)
-                #print(speaker)
-                writeNumber(0)
-                time.sleep(t_wait)
+                	writeNumber(int(vertLeft))#vl
+                	time.sleep(t_wait)
+			cl = int(m_4*63+64)
+#			print(cl)			
+			writeNumber(cl)
+                	time.sleep(t_wait)
+                	
+#			print(cl, int(forwLeft), int(forwRight), int(vertRight), int(vertLeft))
+
+                	writeNumber(0)
+                	time.sleep(t_wait)
                 
         
                 #print(str(int(forwLeft)) + "\t" + str(int(forwLeft)) + "\t" + str(int(vertLeft)) + "\t" + str(int(vertRight)))
@@ -146,12 +145,12 @@ while True:
 print ('')
                 
 		
-"""
+'''
                 forwLeft = joystick.get_axis(axis_forward_back) * 63 + 64
 
                 writeNumber(forwLeft)
                 time.sleep(0.01)
-                
+		                
                 writeNumber(0)
                 time.sleep(0.01)
 
@@ -169,5 +168,5 @@ print ('')
 
                 writeNumber(0)
                 time.sleep(0.01)
-"""
+'''
 

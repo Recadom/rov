@@ -1,58 +1,47 @@
 #include <Servo.h>
 
-int IN1=4;
-int IN2=5;
-int ENA=3;
+Servo rel;
 
-unsigned long start, finished, elapsed;
+const int REED_PIN = 2; // Pin connected to reed switch
+const int LED_PIN = 13; // LED pin - active-high
+int pos = 0; 
 
-void setup()
+void setup() 
 {
-  pinMode(IN1,OUTPUT);
-  pinMode(IN2,OUTPUT);
-  Serial.begin(9600);
-  delay(1000);
-}
-
-void loop() {
-releaseMot();
-   Serial.println("WOW");
-delay(5000);
-
-}
-
-void releaseMot()
-{
-    finished=millis();
-  elapsed=finished-start;
-  start=millis();
-
-  while (elapsed < 2000) {
-    int max_mot = 255;
-    double prop = 0.6;
-    double time = (elapsed+100)/100;
-    int value = 255;//prop * max_mot / time + (1-prop)*max_mot;
-
-    Serial.println(value);
-
-    if (value == 0) {
-      analogWrite(ENA, 0);
-    }
-    else if (value > 0) {
-      analogWrite(ENA, abs(value));  // motor speed
-      digitalWrite(IN1, LOW); // rotate forward
-      digitalWrite(IN2, HIGH);
-    }
-    else if (value < 0) {
-      analogWrite(ENA, abs(value)); // motor speed
-      digitalWrite(IN1, HIGH); // rotate reverse
-      digitalWrite(IN2, LOW);
-    }
-
-    finished=millis();
-    elapsed=finished-start;
+  //Serial.begin(9600);
+  rel.attach(9);
+  // Since the other end of the reed switch is connected to ground, we need
+  // to pull-up the reed switch pin internally.
+  pinMode(REED_PIN, INPUT_PULLUP);
+  pinMode(LED_PIN, OUTPUT);
+  //rel.write(0);
+  for (pos = 0; pos <= 115; pos += 1) { // goes from 0 degrees to 180 degrees
+    // in steps of 1 degree
+    rel.write(pos);              // tell servo to go to position in variable 'pos'
+    delay(15);                       // waits 15ms for the servo to reach the position
   }
-  analogWrite(ENA, 0);
 }
+
+void loop() 
+{
+  int proximity = digitalRead(REED_PIN); // Read the state of the switch
+  if (proximity == LOW) // If the pin reads low, the switch is closed.
+  {
+    //Serial.println("Switch closed");
+    digitalWrite(LED_PIN, HIGH); // Turn the LED on
+    for (pos = 115; pos >= 95; pos -= 1) { // goes from 180 degrees to 0 degrees
+      rel.write(pos);              // tell servo to go to position in variable 'pos'
+      delay(15);                       // waits 15ms for the servo to reach the position
+    }
+    delay(10000);
+
+  }
+  else
+  {
+    digitalWrite(LED_PIN, LOW); // Turn the LED off
+
+  }
+}
+
 
 
