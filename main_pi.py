@@ -28,9 +28,10 @@ def readNumber():
 def send(sgs):
     pr = ""
     for signal in sgs:
-        writeNumber(int(signal))
+        writeNumber(signal)
         time.sleep(0.01)
-        pr += int(signal) + ", "
+        pr += str(signal) + ", "
+    writeNumber(0)
     print(pr)
 
 
@@ -52,26 +53,25 @@ while True:
                 lr = joystick.get_axis(axis_left_right)
                 ud = joystick.get_axis(axis_up_down)
                 tw = joystick.get_axis(axis_twist)
-                hat = joystick.get_hat(0)
-                #trig = joystick.get_
+                trig = joystick.get_button(0)
 
-                forwLeft = (fb + lr/2) * mult + 64
-                forwRight = (fb - lr/2) * mult + 64
+                forwLeft = int((fb + lr/2) * mult + 64)
+                forwRight = int((fb - lr/2) * mult + 64)
                 if (fb + lr/2) > 1:
-                        forwLeft = 1 * mult + 64
+                        forwLeft = int(1 * mult + 64)
 
                 if (fb + lr/2) < -1:
-                        forwLeft = -1 * mult + 64
+                        forwLeft = int(-1 * mult + 64)
 
                 if (fb - lr/2) > 1:
-                        forwRight = 1 * mult + 64
+                        forwRight = int(1 * mult + 64)
                         
                 if (fb - lr/2) < -1:
-                        forwRight = -1 * 63 + 64
+                        forwRight = int(-1 * 63 + 64)
                 
-                vertLeft = ud * mult + 64
-                vertRight = ud * mult + 64
-                cl = abs(hat*63+64)
+                vertLeft = int(ud * mult + 64)
+                vertRight = int(ud * mult + 64)
+                cl = int(abs(trig*63+64))
                 
                 Signals = [
                     forwLeft,
@@ -79,9 +79,8 @@ while True:
                     forwRight,
                     vertLeft,
                     cl,
-                    0
                 ]
-
+                #print("= " + str(Signals))
                 send(Signals)
                 send(Signals)
                 
@@ -102,6 +101,5 @@ while True:
 
 
 print ('')
-                
 
 
