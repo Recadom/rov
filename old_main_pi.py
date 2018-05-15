@@ -1,11 +1,11 @@
-#import smbus
+import smbus
 import time
 import pygame
 import sys
 
 
 # for RPI version 1, use "bus = smbus.SMBus(0)"
-#bus = smbus.SMBus(1)
+bus = smbus.SMBus(1)
 
 # This is the address we setup in the Arduino Program
 address = 0x04
