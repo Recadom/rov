@@ -1,6 +1,6 @@
 import time, os
 import pygame
-import serial
+#import serial
 from pygame.locals import *
 from filedit import File_Name
 
