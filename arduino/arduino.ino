@@ -235,12 +235,12 @@ void loop() {
     digitalWrite(in2, LOW);
   }
   
-  if (timer > 2) {
+  /*if (timer > 2) {
     for (int i = 0; i < 5; ++i)
         motor(offSignals[i], i);
     timer = 0;
   }
-  ++timer;
+  ++timer;*/
   delay(100);
 }
 
