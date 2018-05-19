@@ -55,19 +55,20 @@ while True:
                 ud = joystick.get_axis(axis_up_down)
                 tw = joystick.get_axis(axis_twist)
                 trig = joystick.get_button(0)
+		
 
-                forwLeft = int((fb + lr/2) * mult + 64)
-                forwRight = int((fb - lr/2) * mult + 64)
-                if (fb + lr/2) > 1:
+                forwLeft = int((fb + tw/2) * mult + 64)
+                forwRight = int((fb - tw/2) * mult + 64)
+                if (fb + tw/2) > 1:
                         forwLeft = int(1 * mult + 64)
 
-                if (fb + lr/2) < -1:
+                if (fb + tw/2) < -1:
                         forwLeft = int(-1 * mult + 64)
 
-                if (fb - lr/2) > 1:
+                if (fb - tw/2) > 1:
                         forwRight = int(1 * mult + 64)
                         
-                if (fb - lr/2) < -1:
+                if (fb - tw/2) < -1:
                         forwRight = int(-1 * 63 + 64)
                 
                 vertLeft = int(ud * mult + 64)
