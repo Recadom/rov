@@ -18,7 +18,8 @@ def writeNumber(value):
     value = int(value)
     bus.write_byte(address, value)
     # bus.write_byte_data(address, 0, value)
-    return -1
+
+
 
 def readNumber():
     number = bus.read_byte(address)
