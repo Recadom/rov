@@ -15,11 +15,11 @@ void setup()
   pinMode(REED_PIN, INPUT_PULLUP);
   pinMode(LED_PIN, OUTPUT);
   //rel.write(0);
-  for (pos = 0; pos <= 115; pos += 1) { // goes from 0 degrees to 180 degrees
+  //for (pos = 0; pos <= 115; pos += 1) { // goes from 0 degrees to 180 degrees
     // in steps of 1 degree
-    rel.write(pos);              // tell servo to go to position in variable 'pos'
+    rel.write(15);              // tell servo to go to position in variable 'pos'
     delay(15);                       // waits 15ms for the servo to reach the position
-  }
+  //}
 }
 
 void loop() 
@@ -29,16 +29,17 @@ void loop()
   {
     //Serial.println("Switch closed");
     digitalWrite(LED_PIN, HIGH); // Turn the LED on
-    for (pos = 115; pos >= 95; pos -= 1) { // goes from 180 degrees to 0 degrees
-      rel.write(pos);              // tell servo to go to position in variable 'pos'
+    //for (pos = 115; pos >= 95; pos -= 1) { // goes from 180 degrees to 0 degrees
+      rel.write(50);              // tell servo to go to position in variable 'pos'
       delay(15);                       // waits 15ms for the servo to reach the position
-    }
+    //}
     delay(10000);
 
   }
   else
   {
     digitalWrite(LED_PIN, LOW); // Turn the LED off
+    rel.write(15);
 
   }
 }
