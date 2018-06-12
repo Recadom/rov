@@ -1,6 +1,6 @@
 #include <Wire.h>
 #include <Servo.h>
-Servo claw;
+//Servo claw;
 
 //int speaker_pin = 3;
 int in1 = 12;
@@ -22,11 +22,11 @@ int prevSignals[5] = {64, 64, 64, 64, 64};
 int Signals[5] = {64, 64, 64, 64, 64};
 int offSignals[5] = {64, 64, 64, 64, 64};
 
-/* define claw pins
- int IN1=4;
- int IN2=2;
- int ENA=8;
- */
+// define claw pins
+ int IN1=2;
+ int IN2=4;
+ int ENA=3;
+
 
  int timer = 0;
 
@@ -54,11 +54,11 @@ void setup()
   vertLeft.writeMicroseconds(1500);
   vertRight.writeMicroseconds(1500);
 
-  /*set up claw
+  //set up claw
    pinMode(IN1,OUTPUT);
-   pinMode(IN2,OUTPUT);*/
+   pinMode(IN2,OUTPUT);
 
-  claw.attach(9); 
+  //claw.attach(9); 
 
   pinMode(in1, OUTPUT);
   digitalWrite(in1, HIGH);
@@ -190,9 +190,10 @@ void motor(int x, int mot) {
   case 4:
     {
       //vertRight.writeMicroseconds(state);
-      int clawSpeed = 45 - abs(x - 64) * 45 / 64;
-      claw.write(clawSpeed);
-      /*if (clawSpeed == 0) {
+      //int clawSpeed = 45 - abs(x - 64) * 45 / 64;
+      int clawSpeed = (x - 64) *4 ;
+      //claw.write(clawSpeed);
+      if (clawSpeed == 0) {
        analogWrite(ENA, 0);
        }
        else if (clawSpeed > 0) {
@@ -204,7 +205,7 @@ void motor(int x, int mot) {
        analogWrite(ENA, abs(clawSpeed)); // motor speed
        digitalWrite(IN1, HIGH); // rotate reverse
        digitalWrite(IN2, LOW);
-       }*/
+       }
       //mot = 0;
       break;
     }
