@@ -55,6 +55,7 @@ while True:
                 ud = joystick.get_axis(axis_up_down)
                 tw = joystick.get_axis(axis_twist)
                 trig = joystick.get_button(0)
+		sp = joystick.get_hat(0)(0)
 		
 
                 forwLeft = int((fb + tw/2) * mult + 64)
@@ -81,6 +82,7 @@ while True:
                     forwRight,
                     vertLeft,
                     cl,
+			sp,
                 ]
                 #print("= " + str(Signals))
                 send(Signals)
