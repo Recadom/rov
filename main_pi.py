@@ -56,7 +56,8 @@ while True:
                 tw = joystick.get_axis(axis_twist)
                 trig = joystick.get_button(0)
 		sp = joystick.get_hat(0)(0)
-		
+		enable = joystick.get_button(1)
+
 
                 forwLeft = int((fb + tw/2) * mult + 64)
                 forwRight = int((fb - tw/2) * mult + 64)
@@ -74,7 +75,7 @@ while True:
                 
                 vertLeft = int(ud * mult + 64)
                 vertRight = int(ud * mult + 64)
-                cl = int(abs(trig*63+64))
+                cl = int(abs(((trig) * (enable-0.3))*90+64))
                 
                 Signals = [
                     forwLeft,
