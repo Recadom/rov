@@ -18,9 +18,9 @@ byte pin_forwRight = 10;
 byte pin_vertLeft = 5;
 byte pin_vertRight = 6;
 
-int prevSignals[5] = {64, 64, 64, 64, 64};
-int Signals[5] = {64, 64, 64, 64, 64};
-int offSignals[5] = {64, 64, 64, 64, 64};
+int prevSignals[6] = {64, 64, 64, 64, 64, 0};
+int Signals[6] = {64, 64, 64, 64, 64, 0};
+int offSignals[6] = {64, 64, 64, 64, 64, 0};
 
 // define claw pins
  int IN1=2;
@@ -69,8 +69,8 @@ void setup()
   delay(1000); // delay to allow the ESC to recognize the stopped signal
 }
 
-bool equals(int a[5], int b[5]) {
-  for (int x=0; x<5; ++x) {
+bool equals(int a[6], int b[6]) {
+  for (int x=0; x<6; ++x) {
     if (a[x] != b[x]) {
       return false;
     }
@@ -89,10 +89,10 @@ void receiveEvent(int bytes) {
   if (x == 0) {
     mot = 0;
     if (equals(prevSignals, Signals)) {
-      for (int i = 0; i < 5; ++i)
+      for (int i = 0; i < 6; ++i)
         motor(Signals[i], i);
     }
-    for (int y=0; y<5; ++y) {
+    for (int y=0; y<6; ++y) {
       prevSignals[y] = Signals[y];
     }
 
@@ -130,6 +130,13 @@ void receiveEvent(int bytes) {
     case 4:
       {
         Signals[4] = x;
+        mot = 5;
+        break;
+      }
+      
+      case 5:
+      {
+        Signals[5] = x;
         mot = 0;
         break;
       }
@@ -207,6 +214,12 @@ void motor(int x, int mot) {
        digitalWrite(IN2, LOW);
        }
       //mot = 0;
+      break;
+    }
+    case 5:
+    {
+      if(x)
+        tone(9, 400, 6000);
       break;
     }
 
