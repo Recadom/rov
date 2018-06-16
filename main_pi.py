@@ -52,25 +52,31 @@ while True:
                 pygame.event.pump()
                 fb = joystick.get_axis(axis_forward_back)
                 lr = joystick.get_axis(axis_left_right)
-                ud = joystick.get_axis(axis_up_down)
-                tw = joystick.get_axis(axis_twist)
+                ud = joystick.get_axis(axis_up_down) / 2
+		fast1 = joystick.get_button(3)
+                tw = joystick.get_axis(axis_twist) * 2 / 3
                 trig = joystick.get_button(0)
-		sp = joystick.get_hat(0)(0)
+		sp = joystick.get_hat(0)[0] + 3
 		enable = joystick.get_button(1)
+		fast2 = joystick.get_button(4)
+		
+		if(fast2):
+			ud = ud * 2
 
-
-                forwLeft = int((fb + tw/2) * mult + 64)
-                forwRight = int((fb - tw/2) * mult + 64)
-                if (fb + tw/2) > 1:
+		if(fast1):
+			tw = tw * 3 / 2 
+                forwLeft = int((fb + tw) * mult + 64)
+                forwRight = int((fb - tw) * mult + 64)
+                if (fb + tw) > 1:
                         forwLeft = int(1 * mult + 64)
 
-                if (fb + tw/2) < -1:
+                if (fb + tw) < -1:
                         forwLeft = int(-1 * mult + 64)
 
-                if (fb - tw/2) > 1:
+                if (fb - tw) > 1:
                         forwRight = int(1 * mult + 64)
                         
-                if (fb - tw/2) < -1:
+                if (fb - tw) < -1:
                         forwRight = int(-1 * 63 + 64)
                 
                 vertLeft = int(ud * mult + 64)
@@ -78,11 +84,11 @@ while True:
                 cl = int(abs(((trig) * (enable-0.3))*90+64))
                 
                 Signals = [
-                    forwLeft,
-                    vertRight,
-                    forwRight,
-                    vertLeft,
-                    cl,
+			forwLeft,
+			vertRight,
+			forwRight,
+			vertLeft,
+			cl,
 			sp,
                 ]
                 #print("= " + str(Signals))
