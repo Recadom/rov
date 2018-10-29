@@ -18,9 +18,9 @@ byte pin_forwRight = 10;
 byte pin_vertLeft = 5;
 byte pin_vertRight = 6;
 
-int prevSignals[6] = {64, 64, 64, 64, 64, 0};
-int Signals[6] = {64, 64, 64, 64, 64, 0};
-int offSignals[6] = {64, 64, 64, 64, 64, 0};
+int prevSignals[6] = {64, 64, 64, 64, 64, 3};
+int Signals[6] = {64, 64, 64, 64, 64, 3};
+int offSignals[6] = {64, 64, 64, 64, 64, 3};
 
 // define claw pins
  int IN1=2;
@@ -218,8 +218,9 @@ void motor(int x, int mot) {
     }
     case 5:
     {
-      if(x)
+      if(x==2) 
         tone(9, 400, 6000);
+        
       break;
     }
 
